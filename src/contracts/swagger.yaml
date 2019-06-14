@@ -1,0 +1,85 @@
+swagger: "2.0"
+info:
+  description: "This is a sample testing"
+  version: "1.0.0"
+  title: "Test swagger"
+paths:
+  /forest:
+    x-swagger-router-controller: forest
+    get:
+      operationId: animals
+      consumes:
+        - application/json
+      parameters:
+        - name: size
+          in: query
+          type: integer
+          description:  Size of animals
+      responses:
+        200:
+          x-gulp-swagger-codegen-outcome: list_animals
+          description: "Return list animal"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Animal'
+        400:
+          x-gulp-swagger-codegen-outcome: badRequest
+          description: Bad request
+          schema:
+            $ref: '#/definitions/BadRequestResponse'
+        500:
+          x-gulp-swagger-codegen-outcome: error
+          description: Server error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        501:
+          x-gulp-swagger-codegen-outcome: notImplemented
+          description: Not implemented
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+definitions:
+  Animal:
+    type: object
+    required:
+      - "name"
+    properties:
+      id:
+        type: integer
+        format: int64
+      name:
+        type: string
+        example: "dog"
+      photoUrls:
+        type: string
+  Size:
+    type: string
+  BadRequestResponse:
+    type: object
+    properties:
+      message:
+        type: string
+      errors:
+        type: array
+        items:
+          $ref: '#/definitions/BadRequestObject'
+      warnings:
+        type: array
+        items:
+          $ref: '#/definitions/BadRequestObject'
+  BadRequestObject:
+    type: object
+    properties:
+      code:
+        type: string
+      message:
+        type: string
+      path:
+        type: object
+  ErrorResponse:
+    type: object
+    properties:
+      message:
+        type: string
+      stack:
+        type: string
