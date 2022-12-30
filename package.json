@@ -32,6 +32,6 @@
     "gulp-esdoc": "^0.4.1",
     "gulp-eslint": "^5.0.0",
     "gulp-istanbul": "^1.1.3",
-    "mocha": "^6.1.4"
+    "mocha": "^10.2.0"
   }
 }
